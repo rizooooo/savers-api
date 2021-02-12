@@ -1,6 +1,5 @@
 const express = require('express');
 const dotenv = require('dotenv');
-
 dotenv.config({ path: './config/config.env' });
 const DB = require('../config/db');
 const { InquiryRoutes } = require('./routes');
@@ -9,6 +8,7 @@ const { InquiryRoutes } = require('./routes');
 const authenticateDB = async () => {
     try {
         await DB.authenticate();
+        await DB.sync();
         console.log('Connection has been established successfully.');
     } catch (error) {
         console.error('Unable to connect to the database:', error);
